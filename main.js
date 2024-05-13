@@ -2,30 +2,63 @@
 const btns = document.querySelectorAll('.accordion');
 
 
-btns.forEach(item => {
-    item.addEventListener('click', function(e){
-    
-        item.classList.toggle('active');
 
-        const contentBlock = item.nextElementSibling;
+btns.forEach(function(btn){
 
-        if(item.classList.contains('active')){
-            document.querySelector('.active').classList.remove('active');
-            contentBlock.style.maxHeight = 0 + 'px';
+    btn.addEventListener('click', function(e){
+        
+
+        const content = btn.nextElementSibling;
+        
+
+        if(btn.classList.contains('active')){
+            btn.classList.remove('active');
+            content.style.maxHeight = 0;
         }else{
-            contentBlock.style.maxHeight = contentBlock.scrollHeight + 'px';
+            btns.forEach(item => {
+                item.classList.remove('active');
+            })
+
+            const contentBlocks = document.querySelectorAll('.content');
+            contentBlocks.forEach(item => {
+                item.style.maxHeight = 0;
+            })
+
+
+            btn.classList.add('active');
+
+            content.style.maxHeight = content.scrollHeight + 'px';
         }
 
-        
-        /* if(item.classList.contains('active')){
-            contentBlock.style.maxHeight = contentBlock.scrollHeight + 'px';
-        }else{
-            contentBlock.style.maxHeight = 0 + 'px';
-        } */
-        
 
-        /* item.classList.toggle('active');
-        let contentBlock = item.nextElementSibling;
-        contentBlock.style.maxHeight = contentBlock.scrollHeight + 'px'; */
     })
+
 })
+
+
+
+/* btns.forEach(btn => {
+    btn.addEventListener('click', function(){
+        const content = btn.nextElementSibling;
+
+        if(btn.classList.contains('active')){
+            btn.classList.remove('active');
+            content.style.maxHeight = 0;
+        }else{
+            btns.forEach(function(btn){
+                btn.classList.remove('active');
+            })
+            
+
+            const contentBlocks = document.querySelectorAll('.content');
+            contentBlocks.forEach(function(block){
+                block.style.maxHeight = 0;
+            })
+
+
+            btn.classList.add('active');
+
+            content.style.maxHeight = content.scrollHeight + 'px';
+        }
+    })
+}) */
